@@ -4,7 +4,7 @@
         <div class="bodies">
             <NewTask v-if="box.name == 'Requested'"/>
             <div class="tasks" v-for="d, i in this.$store.state.tasks" :key="i">
-                <ActiveTask v-if="d.status == box.name" :task="d"/>
+                <ActiveTask v-if="d.Status == box.name" :task="d"/>
             </div>
         </div>
     </div>

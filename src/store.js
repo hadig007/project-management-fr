@@ -32,6 +32,13 @@ var store = createStore({
           color: "blue",
           priority: "normal",
         },
+        {
+          name: "Trash",
+          tag: "main",
+          description: "-",
+          color: "red",
+          priority: "normal",
+        },
       ],
       box: {
         name: "",
@@ -99,7 +106,27 @@ var store = createStore({
           )
           console.log(result)
           if (result.status == 200){
-            c.commit("NEW_TASK", payload)
+            c.commit("NEW_TASK", result.data.data.Value)
+          }
+      } catch (e) {
+        alert(e)
+      }
+    },
+    async updateTask(c, payload) {
+      try {
+        // alert(payload.Status)
+        let result = await axios.patch(
+          c.state.backend.url+"/task/update",
+          payload,
+          {
+            headers:{
+              "Content-Type":"application/json"
+            }
+          }
+          )
+          console.log(result)
+          if (result.status == 200){
+            //
           }
       } catch (e) {
         alert(e)

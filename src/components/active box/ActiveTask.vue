@@ -1,13 +1,13 @@
 <template>
     <div class="task"
-        :class="[task.status == 'Requested' ? 'requested' : '' || task.status == 'Progress' ? 'progress' : 'done']"
+        :class="[task.Status == 'Requested' ? 'requested' : '' || task.Status == 'Progress' ? 'progress' : 'done']"
     >
         <div
         @click="backB(task)"
-            v-if="task.status != 'Requested'" class="b back">{{ back }}</div>
-        <p :class="[task.status == 'Requested' ? 'left' : '']">{{ task.name }}</p>
+            v-if="task.Status != 'Requested'" class="b back">{{ back }}</div>
+        <p :class="[task.Status == 'Requested' ? 'left' : '']">{{ task.Name }}</p>
         <div 
-        v-if="task.status != 'Done'"
+        v-if="task.Status != 'Done'"
         class="b next" @click="nextB(task)"> {{ next }}</div>
     </div>
 </template>
@@ -22,13 +22,17 @@ export default {
         }
     },
     methods:{
-        nextB(d){
-            d.status == "Requested" ? d.status = "Progress"
-            : d.status = "Done"
+        async nextB(d){
+            d.Status == "Requested" ? d.Status = "Progress"
+            : d.Status = "Done"
+            
+            await this.$store.dispatch("updateTask", d)
         },
-        backB(d){
-            d.status == "Done" ? d.status = "Progress"
-            : d.status = "Requested"
+        async backB(d){
+            d.Status == "Done" ? d.Status = "Progress"
+            : d.Status = "Requested"
+            await this.$store.dispatch("updateTask", d)
+
         }
     }
 
