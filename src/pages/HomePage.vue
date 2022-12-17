@@ -15,7 +15,9 @@ import ActiveBox from '@/components/active box/ActiveBox.vue';
 import MainHeader from '@/components/MainHeader.vue';
 import NewBoxVue from '@/components/new box/NewBox.vue';
 export default {
-
+    async created(){
+        await this.$store.dispatch("getTasks")
+    },
     components: { NewBoxVue, MainHeader, ActiveBox }
 }
 </script>

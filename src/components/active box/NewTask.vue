@@ -15,9 +15,9 @@ export default {
                 return this.inpErr = true
             }
             console.log(this.name)
-            this.$store.commit("newTask", {
+            this.$store.dispatch("newTask", {
                 name: this.name,
-                status: this.$store.state.boxes[0].name
+                status: "Requested"
             })
             this.name = ""
         }

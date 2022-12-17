@@ -20,12 +20,12 @@ export default {
 
             }
             console.log(this.name)
-            this.$store.commit("newBox", {
+            this.$store.dispatch("newBox", {
                 name:this.name,
-                tag:"",
-                description:"",
-                color:"",
-                priority:""
+                tag:"-",
+                description:"-",
+                color:"-",
+                priority:"-"
             })
             this.name = ""
         }

@@ -9,20 +9,29 @@ import (
 )
 
 var task model.TaskModel
+var tasks []model.TaskModel
 
 func TaskStore(c *gin.Context) {
+	c.ShouldBindJSON(&task)
+
 	result := database.Mysql.Save(&model.TaskModel{
-		Name:   "Starter",
-		Status: "Requested",
-		Color:  "blue",
+		Name:   task.Name,
+		Status: task.Status,
+		Color:  task.Color,
 	})
 	if result.Error != nil {
 		log.Fatal("Failed save data")
 	}
+
+	c.JSON(200, gin.H{
+		"message": "success",
+		"data":    result,
+	})
+
 }
 
 func TaskIndex(c *gin.Context) {
-	data := database.Mysql.Find(&task)
+	data := database.Mysql.Find(&tasks)
 	c.JSON(200, gin.H{
 		"message": "success",
 		"data":    data,
